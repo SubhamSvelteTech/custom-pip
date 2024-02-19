@@ -236,41 +236,41 @@ let config = {
   longGap: 4,
 };
 
-function nextRound() {
-  let finished = fullname[roundInfo.current];
-  let body = "Begin ";
-  if (roundInfo.current === "focus") {
-    if (audioType === "noise") {
-      fadeOut();
-    }
-    focusEnd(roundInfo.t);
-    finished += " Round";
-    if (roundInfo.focusNum >= config.longGap) {
-      roundInfo.current = "long";
-      roundInfo.focusNum = 0;
-    } else {
-      roundInfo.current = "short";
-    }
-    body +=
-      "a " +
-      Math.floor(config[roundInfo.current] / 60) +
-      " minute " +
-      fullname[roundInfo.current];
-  } else {
-    roundInfo.current = "focus";
-    roundInfo.focusNum++;
-    roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
-    body += "focusing for " + Math.floor(config.focus / 60) + " minutes";
-  }
+// function nextRound() {
+//   let finished = fullname[roundInfo.current];
+//   let body = "Begin ";
+//   if (roundInfo.current === "focus") {
+//     if (audioType === "noise") {
+//       fadeOut();
+//     }
+//     focusEnd(roundInfo.t);
+//     finished += " Round";
+//     if (roundInfo.focusNum >= config.longGap) {
+//       roundInfo.current = "long";
+//       roundInfo.focusNum = 0;
+//     } else {
+//       roundInfo.current = "short";
+//     }
+//     body +=
+//       "a " +
+//       Math.floor(config[roundInfo.current] / 60) +
+//       " minute " +
+//       fullname[roundInfo.current];
+//   } else {
+//     roundInfo.current = "focus";
+//     roundInfo.focusNum++;
+//     roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
+//     body += "focusing for " + Math.floor(config.focus / 60) + " minutes";
+//   }
 
-  timer.className = "t-" + roundInfo.current;
-  roundInfo.t = 0;
-  if (roundInfo.running) {
-    if (roundInfo.current === "focus" && audioType === "noise") {
-      fadeIn();
-    }
-  }
-}
+//   timer.className = "t-" + roundInfo.current;
+//   roundInfo.t = 0;
+//   if (roundInfo.running) {
+//     if (roundInfo.current === "focus" && audioType === "noise") {
+//       fadeIn();
+//     }
+//   }
+// }
 
 //#region PIP Mode
 let canvas = document.createElement("canvas");
@@ -285,10 +285,10 @@ function loop() {
   ctx.font = "80px monospace";
   ctx.textAlign = "center";
   let seconds = config[roundInfo.current] - roundInfo.t;
-  if (seconds < 0) {
-    nextRound();
-    return;
-  }
+//   if (seconds < 0) {
+//     nextRound();
+//     return;
+//   }
   let timestr =
     Math.floor(seconds / 60)
       .toString()
