@@ -1,52 +1,52 @@
 // ###################################### PIP ######################################
 
-let theme = "dark";
-let themeAccent = "lavender";
+// let theme = "dark";
+// let themeAccent = "lavender";
 
 let pipActive = false;
 
-let config = {
-  focus: 1500,
-  short: 300,
-  long: 900,
-  longGap: 4,
-};
+// let config = {
+//   focus: 1500,
+//   short: 300,
+//   long: 900,
+//   longGap: 4,
+// };
 
 //#region PIP Mode
 let canvas = document.createElement("canvas");
 canvas.width = canvas.height = "fit-content";
 let ctx = canvas.getContext("2d");
 
-function loop() {
-  ctx.fillRect(0, 0, 400, 400);
-  ctx.font = "80px monospace";
-  ctx.textAlign = "center";
-  let seconds = config[roundInfo.current] - roundInfo.t;
-  let timestr =
-    Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0") +
-    ":" +
-    (seconds % 60).toString().padStart(2, "0");
-  ctx.fillText(timestr, 200, 200, 280);
+// function loop() {
+//   ctx.fillRect(0, 0, 400, 400);
+//   ctx.font = "80px monospace";
+//   ctx.textAlign = "center";
+// //   let seconds = config[roundInfo.current] - roundInfo.t;
+//   let timestr =
+//     Math.floor(seconds / 60)
+//       .toString()
+//       .padStart(2, "0") +
+//     ":" +
+//     (seconds % 60).toString().padStart(2, "0");
+//   ctx.fillText(timestr, 200, 200, 280);
 
-  ctx.font = "32px monospace";
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.arc(200, 200, 180, 0, Math.PI * 2);
-  ctx.stroke();
+//   ctx.font = "32px monospace";
+//   ctx.lineWidth = 4;
+//   ctx.beginPath();
+//   ctx.arc(200, 200, 180, 0, Math.PI * 2);
+//   ctx.stroke();
 
-  ctx.lineWidth = 16;
-  ctx.beginPath();
-  ctx.arc(
-    200,
-    200,
-    180,
-    -Math.PI / 2,
-    (1 - roundInfo.t / config[roundInfo.current]) * Math.PI * 2 - Math.PI / 2
-  );
-  ctx.stroke();
-}
+//   ctx.lineWidth = 16;
+//   ctx.beginPath();
+// //   ctx.arc(
+// //     200,
+// //     200,
+// //     180,
+// //     -Math.PI / 2,
+// //     (1 - roundInfo.t / config[roundInfo.current]) * Math.PI * 2 - Math.PI / 2
+// //   );
+//   ctx.stroke();
+// }
 
 if ("documentPictureInPicture" in window) {
   let timerContainer = null;
@@ -135,7 +135,7 @@ if ("documentPictureInPicture" in window) {
     video.addEventListener("pause", () => {
       if (roundInfo.running) pauseplay();
     });
-    loop();
+    // loop();
 
     video.onenterpictureinpicture = () => {
       pipActive = true;
@@ -166,7 +166,7 @@ if ("documentPictureInPicture" in window) {
         video.classList.remove("pipactive");
         return;
       }
-      loop();
+      //   loop();
       video.play();
       video.classList.add("pipactive");
       if (document.pictureInPictureEnabled) {
