@@ -5,11 +5,11 @@ let themeAccent = "lavender";
 
 let pipActive = false;
 
-const fullname = {
-  focus: "Focus",
-  short: "Short Break",
-  long: "Long Break",
-};
+// const fullname = {
+//   focus: "Focus",
+//   short: "Short Break",
+//   long: "Long Break",
+// };
 
 const accents = {
   dark: {
@@ -236,42 +236,6 @@ let config = {
   longGap: 4,
 };
 
-// function nextRound() {
-//   let finished = fullname[roundInfo.current];
-//   let body = "Begin ";
-//   if (roundInfo.current === "focus") {
-//     if (audioType === "noise") {
-//       fadeOut();
-//     }
-//     focusEnd(roundInfo.t);
-//     finished += " Round";
-//     if (roundInfo.focusNum >= config.longGap) {
-//       roundInfo.current = "long";
-//       roundInfo.focusNum = 0;
-//     } else {
-//       roundInfo.current = "short";
-//     }
-//     body +=
-//       "a " +
-//       Math.floor(config[roundInfo.current] / 60) +
-//       " minute " +
-//       fullname[roundInfo.current];
-//   } else {
-//     roundInfo.current = "focus";
-//     roundInfo.focusNum++;
-//     roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
-//     body += "focusing for " + Math.floor(config.focus / 60) + " minutes";
-//   }
-
-//   timer.className = "t-" + roundInfo.current;
-//   roundInfo.t = 0;
-//   if (roundInfo.running) {
-//     if (roundInfo.current === "focus" && audioType === "noise") {
-//       fadeIn();
-//     }
-//   }
-// }
-
 //#region PIP Mode
 let canvas = document.createElement("canvas");
 canvas.width = canvas.height = 400;
@@ -285,10 +249,6 @@ function loop() {
   ctx.font = "80px monospace";
   ctx.textAlign = "center";
   let seconds = config[roundInfo.current] - roundInfo.t;
-//   if (seconds < 0) {
-//     nextRound();
-//     return;
-//   }
   let timestr =
     Math.floor(seconds / 60)
       .toString()
@@ -298,7 +258,7 @@ function loop() {
   ctx.fillText(timestr, 200, 200, 280);
 
   ctx.font = "32px monospace";
-  ctx.fillText(fullname[roundInfo.current].toUpperCase(), 200, 260, 280);
+//   ctx.fillText(fullname[roundInfo.current].toUpperCase(), 200, 260, 280);
 
   ctx.strokeStyle = accents[theme][themeAccent]["--coloraccent"];
   ctx.lineWidth = 4;
