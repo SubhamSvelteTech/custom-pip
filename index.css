@@ -11,6 +11,12 @@ body{
 	cursor: pointer;
 }
 
+.main-video-wrapper{
+	display: flex;
+	gap: 20px;
+	width: fit-content;
+}
+
 /* * {
 	box-sizing: border-box;
 	margin: 0;
