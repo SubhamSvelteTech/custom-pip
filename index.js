@@ -12,177 +12,44 @@ volumeSlider.addEventListener('input', () => {
   gain.gain.linearRampToValueAtTime(volume / 100, audioCtx.currentTime + 1);
 });
 
-// if ("serviceWorker" in navigator) {
-// 	navigator.serviceWorker.register("./sw.js");
-// }
+// let root = document.documentElement;
+// let mainel = document.getElementById("main");
+// let statisticsDiv = document.getElementById("statistics");
+// let menu = document.getElementById("menu");
+// let manageTasks = document.getElementById("managetasks");
 
-// let timerWorker = new Worker("./worker.js");
+// let timediv = document.getElementById("time");
+// let timer = document.getElementById("timer");
+// let roundnoDiv = document.getElementById("roundno");
+// let progress = document.getElementById("progress");
 
-let root = document.documentElement;
+// let nextbtn = document.getElementById("next");
+// let menubtn = document.getElementById("menubtn");
+// let taskSelect = document.getElementById("task-select");
+// let colorsDiv = document.getElementById("colors");
 
-let mainel = document.getElementById("main");
-let statisticsDiv = document.getElementById("statistics");
-let menu = document.getElementById("menu");
-let manageTasks = document.getElementById("managetasks");
-
-let timediv = document.getElementById("time");
-let timer = document.getElementById("timer");
-let roundnoDiv = document.getElementById("roundno");
-// let pauseplaybtn = document.getElementById("pauseplay");
-let progress = document.getElementById("progress");
-
-let nextbtn = document.getElementById("next");
-let menubtn = document.getElementById("menubtn");
-let taskSelect = document.getElementById("task-select");
-
-let colorsDiv = document.getElementById("colors");
-
-
-
-// let viewState = "timer";
-
-// let config = {
-// 	focus: 1500,
-// 	short: 300,
-// 	long: 900,
-// 	longGap: 4,
-// };
-
-// let audioType = "";
-
-// const audioTypes = ["noise"];
-
-// let roundInfo = {
-// 	t: 0,
-// 	focusNum: 1,
-// 	current: "focus",
-// 	running: false,
-// };
-
-//#region Time
-
-// function setTime() {
-// 	let seconds = config[roundInfo.current] - roundInfo.t;
-// 	if (seconds < 0) {
-// 		nextRound();
-// 		return;
-// 	}
-// 	let timestr =
-// 		Math.floor(seconds / 60)
-// 			.toString()
-// 			.padStart(2, "0") +
-// 		":" +
-// 		(seconds % 60).toString().padStart(2, "0");
-// 	timediv.innerText = timestr;
-// 	document.title = `${timestr} ${fullname[roundInfo.current]} - Tomodoro`;
-// 	progress.style.strokeDashoffset = (roundInfo.t / config[roundInfo.current]) * 100;
-// 	if (pipActive) loop();
-// }
-
-// timerWorker.addEventListener("message", (e) => {
-// 	roundInfo.t = e.data.t;
-// 	setTime();
-// 	if (!e.data.running) {
-// 		timer.style.setProperty("--progress", "0");
-// 		nextRound();
-// 	}
-// });
 
 //#endregion
 
 //#region Timer Actions
 
-function nextRound() {
-	let finished = fullname[roundInfo.current];
-	let body = "Begin ";
-	if (roundInfo.current === "focus") {
-		if (audioType === "noise") {
-			fadeOut();
-		}
-		focusEnd(roundInfo.t);
-		finished += " Round";
-		if (roundInfo.focusNum >= config.longGap) {
-			roundInfo.current = "long";
-			roundInfo.focusNum = 0;
-		} else {
-			roundInfo.current = "short";
-		}
-		body += "a " + Math.floor(config[roundInfo.current] / 60) + " minute " + fullname[roundInfo.current];
-	} else {
-		roundInfo.current = "focus";
-		roundInfo.focusNum++;
-		roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
-		body += "focusing for " + Math.floor(config.focus / 60) + " minutes";
-	}
 
-	timer.className = "t-" + roundInfo.current;
-	roundInfo.t = 0;
-	// setTime();
-	if (roundInfo.running) {
-		if (roundInfo.current === "focus" && audioType === "noise") {
-			fadeIn();
-		}
-		// timerWorker.postMessage({
-		// 	type: "start",
-		// 	maxDuration: config[roundInfo.current],
-		// });
-	}
-	notify(`${finished} Complete`, body);
-}
 
-// function pauseplay() {
-// 	if (roundInfo.current === "none") {
-// 		nextRound();
-// 		pauseplaybtn.className = "playing";
+// nextbtn.addEventListener("click", () => {
+// 	nextRound();
+// });
+
+// document.getElementById("resetround").addEventListener("click", () => {
+// 	if (roundInfo.running) pauseplay();
+// 	roundInfo.t = 0;
+// 	// setTime();
+// });
+
+// document.addEventListener("keydown", (event) => {
+// 	if (event.isComposing || event.keyCode === 229) {
 // 		return;
 // 	}
-// 	if (roundInfo.running) {
-// 		if (roundInfo.current === "focus" && audioType === "noise") {
-// 			fadeOut();
-// 		}
-// 		timerWorker.postMessage({ type: "stop" });
-// 		roundInfo.running = false;
-// 		pauseplaybtn.title = "Start Timer";
-// 		pauseplaybtn.className = "paused";
-// 	} else {
-// 		if (roundInfo.current === "focus" && audioType === "noise") {
-// 			fadeIn();
-// 		}
-// 		timerWorker.postMessage({
-// 			type: "start",
-// 			t: roundInfo.t,
-// 			maxDuration: config[roundInfo.current],
-// 		});
-// 		roundInfo.running = true;
-// 		pauseplaybtn.title = "Pause Timer";
-// 		pauseplaybtn.className = "playing";
-// 	}
-// }
-
-// pauseplaybtn.addEventListener("click", pauseplay);
-
-nextbtn.addEventListener("click", () => {
-	nextRound();
-});
-
-document.getElementById("resetround").addEventListener("click", () => {
-	if (roundInfo.running) pauseplay();
-	roundInfo.t = 0;
-	// setTime();
-});
-
-document.addEventListener("keydown", (event) => {
-	if (event.isComposing || event.keyCode === 229) {
-		return;
-	}
-	// if (event.code === "Space") {
-	// 	if (document.activeElement === pauseplaybtn || viewState !== "timer") {
-	// 		return;
-	// 	}
-	// 	pauseplaybtn.focus();
-	// 	pauseplay();
-	// }
-});
+// });
 
 //#endregion
 
@@ -239,19 +106,6 @@ function notify(title, message) {
 		});
 	}
 }
-
-// function setup() {
-// 	if ("Notification" in window) {
-// 		if (Notification.permission !== "denied" && Notification.permission !== "granted") {
-// 			Notification.requestPermission();
-// 		}
-// 	}
-
-// 	// setTime();
-// 	roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
-// }
-
-// setup();
 
 //#endregion
 
@@ -436,45 +290,45 @@ let db;
 
 let statTimeSelect = document.getElementById("stat-time-select");
 
-function loadTasks() {
-	navigator.storage.persist();
-	if (localStorage.getItem("pomo-tasks")) {
-		tasks = JSON.parse(localStorage.getItem("pomo-tasks"));
-		if (!(tasks instanceof Array)) {
-			localStorage.removeItem("pomo-tasks");
-			tasks = ["Default Task"];
-		}
-	}
-	if (localStorage.getItem("pomo-records")) {
-		let records = JSON.parse(localStorage.getItem("pomo-records"));
-		records.forEach((r) => saveRecord(r));
-		localStorage.removeItem("pomo-records");
-	}
-	if (localStorage.getItem("pomo-selected-task")) {
-		if (tasks.includes(localStorage.getItem("pomo-selected-task"))) {
-			selectedTask = localStorage.getItem("pomo-selected-task");
-			taskSelect.value = selectedTask;
-		}
-	}
-	if (localStorage.getItem("pomo-stat-period")) {
-		statTimeSelect.value = localStorage.getItem("pomo-stat-period");
-	}
-	return new Promise((resolve) => {
-		let tr = indexedDB.open("pomo-db", 1);
-		tr.onupgradeneeded = (ev) => {
-			db = ev.target.result;
-			let recordStore = db.createObjectStore("records", { keyPath: "d" });
-			recordStore.createIndex("task", "n", { unique: false });
-			recordStore.transaction.oncomplete = (event) => {
-				resolve();
-			};
-		};
-		tr.onsuccess = (ev) => {
-			db = ev.target.result;
-			resolve();
-		};
-	});
-}
+// function loadTasks() {
+// 	navigator.storage.persist();
+// 	if (localStorage.getItem("pomo-tasks")) {
+// 		tasks = JSON.parse(localStorage.getItem("pomo-tasks"));
+// 		if (!(tasks instanceof Array)) {
+// 			localStorage.removeItem("pomo-tasks");
+// 			tasks = ["Default Task"];
+// 		}
+// 	}
+// 	if (localStorage.getItem("pomo-records")) {
+// 		let records = JSON.parse(localStorage.getItem("pomo-records"));
+// 		records.forEach((r) => saveRecord(r));
+// 		localStorage.removeItem("pomo-records");
+// 	}
+// 	if (localStorage.getItem("pomo-selected-task")) {
+// 		if (tasks.includes(localStorage.getItem("pomo-selected-task"))) {
+// 			selectedTask = localStorage.getItem("pomo-selected-task");
+// 			taskSelect.value = selectedTask;
+// 		}
+// 	}
+// 	if (localStorage.getItem("pomo-stat-period")) {
+// 		statTimeSelect.value = localStorage.getItem("pomo-stat-period");
+// 	}
+// 	return new Promise((resolve) => {
+// 		let tr = indexedDB.open("pomo-db", 1);
+// 		tr.onupgradeneeded = (ev) => {
+// 			db = ev.target.result;
+// 			let recordStore = db.createObjectStore("records", { keyPath: "d" });
+// 			recordStore.createIndex("task", "n", { unique: false });
+// 			recordStore.transaction.oncomplete = (event) => {
+// 				resolve();
+// 			};
+// 		};
+// 		tr.onsuccess = (ev) => {
+// 			db = ev.target.result;
+// 			resolve();
+// 		};
+// 	});
+// }
 
 async function getRecords(time) {
 	let result = [];
@@ -557,38 +411,38 @@ document.getElementById("create-backup").addEventListener("click", () => {
 	};
 });
 
-document.getElementById("backup-restore").addEventListener("change", function () {
-	let files = this.files;
-	if (files.length !== 0) {
-		let file = files[0];
-		file.text().then((res) => {
-			try {
-				let dbBackup = JSON.parse(res);
-				let rec = dbBackup.map((r) => {
-					if (!tasks.includes(r.n)) {
-						tasks.push(r.n);
-						createTaskEl(r.n);
-						if (!tasks.includes(selectedTask)) {
-							selectedTask = r.n;
-							taskSelect.value = r.n;
-						}
-					}
-					return { t: r.t, d: r.d, n: r.n };
-				});
-				saveTasks();
-				noTaskManager();
-				console.log(rec, tasks);
-				let tr = db.transaction("records", "readwrite");
-				tr.oncomplete = () => alert("Backup restored successfully!");
-				let objstore = tr.objectStore("records");
-				rec.forEach((r) => objstore.add(r));
-			} catch (error) {
-				console.log(error);
-				alert("An error occured! Make sure that you are restoring a valid backup file.");
-			}
-		});
-	}
-});
+// document.getElementById("backup-restore").addEventListener("change", function () {
+// 	let files = this.files;
+// 	if (files.length !== 0) {
+// 		let file = files[0];
+// 		file.text().then((res) => {
+// 			try {
+// 				let dbBackup = JSON.parse(res);
+// 				let rec = dbBackup.map((r) => {
+// 					if (!tasks.includes(r.n)) {
+// 						tasks.push(r.n);
+// 						createTaskEl(r.n);
+// 						if (!tasks.includes(selectedTask)) {
+// 							selectedTask = r.n;
+// 							taskSelect.value = r.n;
+// 						}
+// 					}
+// 					return { t: r.t, d: r.d, n: r.n };
+// 				});
+// 				saveTasks();
+// 				noTaskManager();
+// 				console.log(rec, tasks);
+// 				let tr = db.transaction("records", "readwrite");
+// 				tr.oncomplete = () => alert("Backup restored successfully!");
+// 				let objstore = tr.objectStore("records");
+// 				rec.forEach((r) => objstore.add(r));
+// 			} catch (error) {
+// 				console.log(error);
+// 				alert("An error occured! Make sure that you are restoring a valid backup file.");
+// 			}
+// 		});
+// 	}
+// });
 
 let allCheckbox = document.getElementById("all");
 let pieCardContainer = document.getElementById("pie-card-container");
@@ -605,160 +459,160 @@ statTimeSelect.addEventListener("change", () => {
 let taskBars = {};
 let pieCards = {};
 
-function createTaskEl(task) {
-	filteredTasks.add(task);
-	let op = document.createElement("option");
-	op.value = op.innerText = task;
-	taskSelect.appendChild(op);
+// function createTaskEl(task) {
+// 	filteredTasks.add(task);
+// 	let op = document.createElement("option");
+// 	op.value = op.innerText = task;
+// 	// taskSelect.appendChild(op);
 
-	let tel = document.createElement("div");
-	tel.className = "task";
-	let tname = document.createElement("div");
-	tname.className = "task-name";
-	tname.innerText = task;
-	tel.appendChild(tname);
+// 	let tel = document.createElement("div");
+// 	tel.className = "task";
+// 	let tname = document.createElement("div");
+// 	tname.className = "task-name";
+// 	tname.innerText = task;
+// 	tel.appendChild(tname);
 
-	let chip = document.createElement("label");
-	chip.className = "task-chip";
-	let chipCheckbox = document.createElement("input");
-	chipCheckbox.className = "task-checkbox";
-	chipCheckbox.type = "checkbox";
-	chipCheckbox.defaultChecked = true;
-	let namespan = document.createElement("span");
-	namespan.className = "chip-task-name";
-	namespan.innerText = task;
+// 	let chip = document.createElement("label");
+// 	chip.className = "task-chip";
+// 	let chipCheckbox = document.createElement("input");
+// 	chipCheckbox.className = "task-checkbox";
+// 	chipCheckbox.type = "checkbox";
+// 	chipCheckbox.defaultChecked = true;
+// 	let namespan = document.createElement("span");
+// 	namespan.className = "chip-task-name";
+// 	namespan.innerText = task;
 
-	chip.append(chipCheckbox, namespan);
-	filterContainer.appendChild(chip);
+// 	chip.append(chipCheckbox, namespan);
+// 	filterContainer.appendChild(chip);
 
-	taskBars[task] = barGenerator(task);
-	timeSpentChart.appendChild(taskBars[task]);
+// 	taskBars[task] = barGenerator(task);
+// 	timeSpentChart.appendChild(taskBars[task]);
 
-	pieCards[task] = pieCardGenerator(task);
-	pieCardContainer.appendChild(pieCards[task]);
+// 	pieCards[task] = pieCardGenerator(task);
+// 	pieCardContainer.appendChild(pieCards[task]);
 
-	chipCheckbox.addEventListener("change", function () {
-		if (this.checked) {
-			filteredTasks.add(task);
-			taskBars[task].style.display = "flex";
-			pieCards[task].style.display = "block";
-			if (filteredTasks.size === tasks.length) allCheckbox.checked = true;
-		} else {
-			filteredTasks.delete(task);
-			taskBars[task].style.display = "none";
-			pieCards[task].style.display = "none";
-			if (filteredTasks.size < tasks.length) allCheckbox.checked = false;
-		}
-		loadStatistics();
-	});
+// 	chipCheckbox.addEventListener("change", function () {
+// 		if (this.checked) {
+// 			filteredTasks.add(task);
+// 			taskBars[task].style.display = "flex";
+// 			pieCards[task].style.display = "block";
+// 			if (filteredTasks.size === tasks.length) allCheckbox.checked = true;
+// 		} else {
+// 			filteredTasks.delete(task);
+// 			taskBars[task].style.display = "none";
+// 			pieCards[task].style.display = "none";
+// 			if (filteredTasks.size < tasks.length) allCheckbox.checked = false;
+// 		}
+// 		loadStatistics();
+// 	});
 
-	let tdel = document.createElement("button");
-	tdel.className = "task-delete-btn crossbtn";
-	tdel.title = "Delete this task";
-	tdel.addEventListener("click", () => {
-		let p = confirm(
-			'Are you sure you want to delete the task "' +
-				task +
-				'"? All the data related to this task will be deleted.'
-		);
-		if (!p) return;
-		tasks.splice(tasks.indexOf(task), 1);
-		op.remove();
-		tel.remove();
-		chip.remove();
-		filteredTasks.delete(task);
-		if (filteredTasks.size === 0) {
-			allCheckbox.checked = false;
-		}
-		if (filteredTasks.size === tasks.length) {
-			allCheckbox.checked = true;
-		}
-		taskBars[task].remove();
-		delete taskBars[task];
-		pieCards[task].remove();
-		delete pieCards[task];
-		if (selectedTask === task) {
-			if (tasks.length > 0) {
-				selectedTask = tasks[0];
-				taskSelect.value = selectedTask;
-			}
-		}
-		noTaskManager();
-		deleteRecords(task);
-		saveTasks();
-	});
-	tel.appendChild(tdel);
+// 	let tdel = document.createElement("button");
+// 	tdel.className = "task-delete-btn crossbtn";
+// 	tdel.title = "Delete this task";
+// 	tdel.addEventListener("click", () => {
+// 		let p = confirm(
+// 			'Are you sure you want to delete the task "' +
+// 				task +
+// 				'"? All the data related to this task will be deleted.'
+// 		);
+// 		if (!p) return;
+// 		tasks.splice(tasks.indexOf(task), 1);
+// 		op.remove();
+// 		tel.remove();
+// 		chip.remove();
+// 		filteredTasks.delete(task);
+// 		if (filteredTasks.size === 0) {
+// 			allCheckbox.checked = false;
+// 		}
+// 		if (filteredTasks.size === tasks.length) {
+// 			allCheckbox.checked = true;
+// 		}
+// 		taskBars[task].remove();
+// 		delete taskBars[task];
+// 		pieCards[task].remove();
+// 		delete pieCards[task];
+// 		if (selectedTask === task) {
+// 			if (tasks.length > 0) {
+// 				selectedTask = tasks[0];
+// 				// taskSelect.value = selectedTask;
+// 			}
+// 		}
+// 		noTaskManager();
+// 		deleteRecords(task);
+// 		saveTasks();
+// 	});
+// 	tel.appendChild(tdel);
 
-	taskContainer.appendChild(tel);
-}
+// 	taskContainer.appendChild(tel);
+// }
 
-let noTaskTitle = document.getElementById("no-task-title");
+// let noTaskTitle = document.getElementById("no-task-title");
 
-function noTaskManager() {
-	if (tasks.length === 0) {
-		taskSelect.style.display = "none";
-		noTaskTitle.style.display = "block";
-	} else {
-		taskSelect.style.display = "initial";
-		noTaskTitle.style.display = "none";
-	}
-}
+// function noTaskManager() {
+// 	if (tasks.length === 0) {
+// 		taskSelect.style.display = "none";
+// 		noTaskTitle.style.display = "block";
+// 	} else {
+// 		taskSelect.style.display = "initial";
+// 		noTaskTitle.style.display = "none";
+// 	}
+// }
 
-async function taskInit() {
-	await loadTasks();
-	taskSelect.innerHTML = "";
-	noTaskManager();
-	tasks.forEach((task) => createTaskEl(task));
-	allCheckbox.addEventListener("change", function () {
-		if (this.checked) {
-			document.querySelectorAll(".task-checkbox").forEach((el) => (el.checked = true));
-			tasks.forEach((task) => {
-				filteredTasks.add(task);
-				taskBars[task].style.display = "flex";
-				pieCards[task].style.display = "block";
-			});
-		} else {
-			document.querySelectorAll(".task-checkbox").forEach((el) => (el.checked = false));
-			tasks.forEach((task) => {
-				filteredTasks.delete(task);
-				taskBars[task].style.display = "none";
-				pieCards[task].style.display = "none";
-			});
-		}
-		loadStatistics();
-	});
-}
+// async function taskInit() {
+// 	await loadTasks();
+// 	taskSelect.innerHTML = "";
+// 	noTaskManager();
+// 	tasks.forEach((task) => createTaskEl(task));
+// 	allCheckbox.addEventListener("change", function () {
+// 		if (this.checked) {
+// 			document.querySelectorAll(".task-checkbox").forEach((el) => (el.checked = true));
+// 			tasks.forEach((task) => {
+// 				filteredTasks.add(task);
+// 				taskBars[task].style.display = "flex";
+// 				pieCards[task].style.display = "block";
+// 			});
+// 		} else {
+// 			document.querySelectorAll(".task-checkbox").forEach((el) => (el.checked = false));
+// 			tasks.forEach((task) => {
+// 				filteredTasks.delete(task);
+// 				taskBars[task].style.display = "none";
+// 				pieCards[task].style.display = "none";
+// 			});
+// 		}
+// 		loadStatistics();
+// 	});
+// }
 
-taskInit();
+// taskInit();
 
-document.getElementById("newtask").addEventListener("submit", function (ev) {
-	ev.preventDefault();
-	let formdata = new FormData(this);
-	let tname = formdata.get("taskname").trim();
-	if (tname === "") {
-		alert("Please Enter a Valid Name!");
-		this.reset();
-		return;
-	}
-	if (tasks.includes(tname)) {
-		alert("Task already exists!");
-		return;
-	}
-	tasks.push(tname);
-	createTaskEl(tname);
-	if (!tasks.includes(selectedTask)) {
-		selectedTask = tname;
-		taskSelect.value = tname;
-	}
-	saveTasks();
-	noTaskManager();
-	this.reset();
-});
+// document.getElementById("newtask").addEventListener("submit", function (ev) {
+// 	ev.preventDefault();
+// 	let formdata = new FormData(this);
+// 	let tname = formdata.get("taskname").trim();
+// 	if (tname === "") {
+// 		alert("Please Enter a Valid Name!");
+// 		this.reset();
+// 		return;
+// 	}
+// 	if (tasks.includes(tname)) {
+// 		alert("Task already exists!");
+// 		return;
+// 	}
+// 	tasks.push(tname);
+// 	createTaskEl(tname);
+// 	if (!tasks.includes(selectedTask)) {
+// 		selectedTask = tname;
+// 		taskSelect.value = tname;
+// 	}
+// 	saveTasks();
+// 	noTaskManager();
+// 	this.reset();
+// });
 
-taskSelect.addEventListener("change", function () {
-	selectedTask = this.value;
-	localStorage.setItem("pomo-selected-task", selectedTask);
-});
+// taskSelect.addEventListener("change", function () {
+// 	selectedTask = this.value;
+// 	localStorage.setItem("pomo-selected-task", selectedTask);
+// });
 
 let format = new Intl.DateTimeFormat(undefined, {
 	dateStyle: "full",
@@ -1084,107 +938,10 @@ function hmstrFull(t) {
 	return `${r[0]} Hour${r[0] > 1 ? "s" : ""} & ${r[1]} Minute${r[1] > 1 ? "s" : ""}`;
 }
 
-//#endregion
-
-//#region Statistics Backup
-
-//todo
-
-//#endregion
-
-//#region Theming
+// ###################################### PIP ######################################
 
 let theme = "dark";
 let themeAccent = "lavender";
-
-// function setTheme(basetheme = "dark", accent) {
-// 	if (!accent) accent = themes[basetheme].defaccent;
-// 	if (basetheme !== "custom") {
-// 		for (let prop in themes[basetheme].props) {
-// 			root.style.setProperty(prop, themes[basetheme].props[prop]);
-// 		}
-// 		document.getElementById("t-" + theme).removeAttribute("selected");
-// 		addColorButtons(basetheme);
-// 		document.getElementById("t-" + basetheme).setAttribute("selected", true);
-// 		setAccent(basetheme, accent);
-// 	}
-// }
-
-let colorBtns = [];
-
-function addColorButtons(basetheme) {
-	colorsDiv.innerHTML = "";
-	colorBtns = [];
-	for (let accent in accents[basetheme]) {
-		let btn = document.createElement("button");
-		btn.className = "color";
-		btn.style.backgroundColor = accents[basetheme][accent]["--coloraccent"];
-		btn.dataset.color = basetheme + "-" + accent;
-		btn.addEventListener("click", () => {
-			setAccent(basetheme, accent);
-		});
-		btn.title = accent;
-		colorBtns.push(btn);
-		colorsDiv.appendChild(btn);
-	}
-}
-
-let themeMeta = document.getElementById("theme-meta");
-
-function setAccent(basetheme, accent) {
-	for (let prop in accents[basetheme][accent]) {
-		root.style.setProperty(prop, accents[basetheme][accent][prop]);
-	}
-	themeMeta.setAttribute("content", accents[basetheme][accent]["--bgcolor"]);
-	colorBtns.forEach((btn) => {
-		if (btn.dataset.active === "true") {
-			btn.dataset.active = "false";
-		}
-		if (btn.dataset.color === basetheme + "-" + accent) {
-			btn.dataset.active = "true";
-		}
-	});
-
-	localStorage.setItem("pomo-theme", basetheme);
-	localStorage.setItem("pomo-theme-accent", accent);
-	theme = basetheme;
-	themeAccent = accent;
-}
-
-// document.getElementById("theme-select").addEventListener("change", function () {
-// 	setTheme(this.value);
-// });
-
-if (localStorage.getItem("pomo-theme")) {
-	theme = localStorage.getItem("pomo-theme");
-	if (localStorage.getItem("pomo-theme-accent")) {
-		themeAccent = localStorage.getItem("pomo-theme-accent");
-	}
-}
-// setTheme(theme, themeAccent);
-
-//#endregion
-
-//#region Timer Durations
-
-// if (localStorage.getItem("pomo-config")) {
-// 	config = JSON.parse(localStorage.getItem("pomo-config"));
-// 	setTime();
-// }
-
-// function saveConfig() {
-// 	localStorage.setItem("pomo-config", JSON.stringify(config));
-// 	setTime();
-// }
-
-
-
-
-
-
-
-
-
 
 let pipActive = false;
 
@@ -1419,35 +1176,38 @@ let config = {
 	longGap: 4,
 };
 
-// let pauseplaybtn = document.getElementById("pauseplay");
-// function pauseplay() {
-// 	if (roundInfo.current === "none") {
-// 		nextRound();
-// 		pauseplaybtn.className = "playing";
-// 		return;
-// 	}
-// 	if (roundInfo.running) {
-// 		if (roundInfo.current === "focus" && audioType === "noise") {
-// 			fadeOut();
-// 		}
-// 		// timerWorker.postMessage({ type: "stop" });
-// 		roundInfo.running = false;
-// 		pauseplaybtn.title = "Start Timer";
-// 		pauseplaybtn.className = "paused";
-// 	} else {
-// 		if (roundInfo.current === "focus" && audioType === "noise") {
-// 			fadeIn();
-// 		}
-// 		// timerWorker.postMessage({
-// 		// 	type: "start",
-// 		// 	t: roundInfo.t,
-// 		// 	maxDuration: config[roundInfo.current],
-// 		// });
-// 		roundInfo.running = true;
-// 		pauseplaybtn.title = "Pause Timer";
-// 		pauseplaybtn.className = "playing";
-// 	}
-// }
+function nextRound() {
+	let finished = fullname[roundInfo.current];
+	let body = "Begin ";
+	if (roundInfo.current === "focus") {
+		if (audioType === "noise") {
+			fadeOut();
+		}
+		focusEnd(roundInfo.t);
+		finished += " Round";
+		if (roundInfo.focusNum >= config.longGap) {
+			roundInfo.current = "long";
+			roundInfo.focusNum = 0;
+		} else {
+			roundInfo.current = "short";
+		}
+		body += "a " + Math.floor(config[roundInfo.current] / 60) + " minute " + fullname[roundInfo.current];
+	} else {
+		roundInfo.current = "focus";
+		roundInfo.focusNum++;
+		roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
+		body += "focusing for " + Math.floor(config.focus / 60) + " minutes";
+	}
+
+	timer.className = "t-" + roundInfo.current;
+	roundInfo.t = 0;
+	if (roundInfo.running) {
+		if (roundInfo.current === "focus" && audioType === "noise") {
+			fadeIn();
+		}
+	}
+	notify(`${finished} Complete`, body);
+}
 
 //#region PIP Mode
 let canvas = document.createElement("canvas");
@@ -1618,24 +1378,3 @@ if ('documentPictureInPicture' in window) {
 		document.getElementById("popupbtn").style.display = "none";
 	}
 }
-// //#endregion
-
-// let versionNo = 1;
-
-// let savedNo = parseInt(localStorage.getItem("pomo-version"));
-
-// if (!savedNo) {
-// 	if (localStorage.getItem("pomo-notfirstload")) {
-// 		localStorage.removeItem("pomo-notfirstload");
-// 	}
-// }
-
-// if (savedNo !== versionNo) {
-// 	document.getElementById("firstload").style.display = "block";
-// 	mainel.style.display = "none";
-// 	document.getElementById("closeintro").addEventListener("click", () => {
-// 		document.getElementById("firstload").style.display = "none";
-// 		localStorage.setItem("pomo-version", versionNo);
-// 		mainel.style.display = "flex";
-// 	});
-// }
