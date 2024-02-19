@@ -1,4 +1,17 @@
-* {
+body{
+	background-color: rgb(34, 34, 34);
+}
+
+.svg-icon {
+	width: 48px;
+	height: 48px;
+}
+
+.svg-icon:hover{
+	cursor: pointer;
+}
+
+/* * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
@@ -1184,4 +1197,4 @@ video.pipactive {
 #slider-container {
 	text-align: center;
 	margin-top: 20px;
-}
+} */
