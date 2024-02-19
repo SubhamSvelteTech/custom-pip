@@ -21,8 +21,8 @@
     <meta name="theme-color" id="theme-meta" content="#222233" />
   </head>
   <body>
-    <button id="menubtn" title="Open Settings"></button>
-    <div id="taskswitcher">
+    <!-- <button id="menubtn" title="Open Settings"></button> -->
+    <!-- <div id="taskswitcher">
       <button id="statbtn" title="View Statistics">
         <span id="statline1"></span>
         <span id="statline2"></span>
@@ -41,7 +41,7 @@
           />
         </svg>
       </button>
-    </div>
+    </div> -->
     <button id="popupbtn" title="Toggle PIP Mode">
       <svg
         class="svg-icon"
@@ -67,12 +67,12 @@
           />
         </svg>
         <div id="time"></div>
-
+        <!-- 
         <div id="status">
           <span id="s-focus">FOCUS</span>
           <span id="s-short">SHORT BREAK</span>
           <span id="s-long">LONG BREAK</span>
-        </div>
+        </div> -->
         <button id="pauseplay" class="paused" title="Start Timer">
           <svg
             id="playing"
@@ -94,7 +94,7 @@
           </svg>
         </button>
       </div>
-      <div id="slider-container">
+      <!-- <div id="slider-container">
         <label for="volume-slider">Volume:</label>
         <input
           type="range"
@@ -105,8 +105,8 @@
           value="5"
         />
         <span id="volume-value">5</span>
-      </div>
-      <button id="resetround" title="Reset Current Timer">
+      </div> -->
+      <!-- <button id="resetround" title="Reset Current Timer">
         <svg
           class="svg-icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -114,9 +114,9 @@
         >
           <path d="M12 12h4v24h-4zm7 12l17 12V12z" />
         </svg>
-      </button>
-      <div id="roundno" title="Number of Focus Rounds"></div>
-      <button id="next" title="Next Round">
+      </button> -->
+      <!-- <div id="roundno" title="Number of Focus Rounds"></div> -->
+      <!-- <button id="next" title="Next Round">
         <svg
           class="svg-icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -124,9 +124,9 @@
         >
           <path d="M12 36l17-12-17-12v24zm20-24v24h4V12h-4z" />
         </svg>
-      </button>
+      </button> -->
     </main>
-    <select name="notif" id="notif-select" title="Notification Type">
+    <!-- <select name="notif" id="notif-select" title="Notification Type">
       <option value="enabled">Enabled</option>
       <option value="silent">Silent</option>
       <option value="disabled">Disabled</option>
@@ -134,27 +134,27 @@
     <select name="notif" id="audio-select" title="Notification Type">
       <option value="disabled" selected>Disabled</option>
       <option value="noise">Enabled</option>
-    </select>
-    <button id="create-backup" class="hover-shadow">Create Backup</button>
-    <label for="backup-restore" id="backup-restore-label" class="hover-shadow"
+    </select> -->
+    <!-- <button id="create-backup" class="hover-shadow">Create Backup</button> -->
+    <!-- <label for="backup-restore" id="backup-restore-label" class="hover-shadow"
       ><input type="file" accept=".json" id="backup-restore" />Restore
       Backup</label
-    >
-    <label for="stat-time-select">Time Period: </label>
+    > -->
+    <!-- <label for="stat-time-select">Time Period: </label>
     <select id="stat-time-select">
       <option value="0">Today</option>
       <option value="1">Past Day</option>
       <option value="7" selected>Past Week</option>
       <option value="365">Past Year</option>
       <option value="all">All Time</option>
-    </select>
-    <div id="filters" class="scrollbar">
+    </select> -->
+    <!-- <div id="filters" class="scrollbar">
       <label class="task-chip">
         <input type="checkbox" id="all" checked />
         <span class="chip-task-name">All Tasks</span>
       </label>
-    </div>
-    <div id="timespent" class="stat-chart scrollbar"></div>
+    </div> -->
+    <!-- <div id="timespent" class="stat-chart scrollbar"></div>
     <form id="newtask" class="task">
       <input
         id="new-task-name"
@@ -170,384 +170,16 @@
         class="crossbtn"
         id="new-task-btn"
       ></button>
-    </form>
-    <div id="pie-card-container" class="scrollbar"></div>
+    </form> -->
+    <!-- <div id="pie-card-container" class="scrollbar"></div>
     <div id="task-container"></div>
     <select name="theme" id="theme-select" title="Theme">
       <option value="dark" id="t-dark" selected>Dark</option>
       <option value="black" id="t-black">Black</option>
       <option value="light" id="t-light">Light</option>
       <option value="white" id="t-white">White</option>
-    </select>
+    </select> -->
     <div id="colors"></div>
-
-    <!-- <div id="menu" class="scrollbar">
-			<div class="menu-title">Tomodoro</div>
-			<div class="content">
-				<section class="section">
-					<h2>Timer</h2>
-					<div class="setting">
-						<label for="focus-input">Focus: <span></span></label>
-						<div class="input-holder">
-							<button class="ibtn" id="focus-dec">-</button>
-							<input type="number" name="focus-input" id="focus-input" min="1" max="180" />
-							<button class="ibtn" id="focus-inc">+</button>
-							minutes
-						</div>
-					</div>
-					<div class="setting">
-						<label for="short-input">Short Break: <span></span></label>
-						<div class="input-holder">
-							<button class="ibtn" id="short-dec">-</button>
-							<input type="number" name="short-input" id="short-input" min="1" max="180" />
-							<button class="ibtn" id="short-inc">+</button>
-							minutes
-						</div>
-					</div>
-					<div class="setting">
-						<label for="long-input">Long Break: <span></span></label>
-						<div class="input-holder">
-							<button class="ibtn" id="long-dec">-</button>
-							<input type="number" name="long-input" id="long-input" min="1" max="180" />
-							<button class="ibtn" id="long-inc">+</button>
-							minutes
-						</div>
-					</div>
-					<div class="setting">
-						<label for="rounds-input">Rounds</label>
-						<br />
-						Number of focus sessions between long breaks.
-						<div class="input-holder">
-							<button class="ibtn" id="rounds-dec">-</button>
-							<input type="number" name="rounds-input" id="rounds-input" min="1" max="18" />
-							<button class="ibtn" id="rounds-inc">+</button>
-							rounds
-						</div>
-					</div>
-				</section>
-				<section class="section">
-					<h2>Appearance</h2>
-					<div class="setting">
-						<label for="theme">Theme:</label>
-						<select name="theme" id="theme-select" title="Theme">
-							<option value="dark" id="t-dark" selected>Dark</option>
-							<option value="black" id="t-black">Black</option>
-							<option value="light" id="t-light">Light</option>
-							<option value="white" id="t-white">White</option>
-						</select>
-					</div>
-					<div class="setting" id="accents">
-						<h3>Accent Color:</h3>
-						<div id="colors"></div>
-					</div>
-				</section>
-				<section class="section">
-					<h2>Sounds & Notifications</h2>
-					<div class="setting">
-						<label for="notif">Notifications:</label>
-						
-						<br /><br />
-						Make sure that your browser allows notifications from this site.
-					</div>
-					<div class="setting">
-						<label for="notif">White Noise:</label>
-						
-						<br /><br />
-						If enabled, white noise will be played during focus sessions. Make sure that your browser allows sound from this site.
-					</div>
-				</section>
-				<section class="section">
-					<h2>Backup and Restore</h2>
-					<button id="create-backup" class="hover-shadow">Create Backup</button>
-					<label for="backup-restore" id="backup-restore-label" class="hover-shadow"><input type="file" accept=".json" id="backup-restore">Restore Backup</label>
-				</section>
-				<section class="section">
-					<h2>About Tomodoro</h2>
-					<div id="about-desc">
-						Tomodoro is an open source pomodoro web app with features like offline support and PIP mode.
-					</div>
-					<a href="https://github.com/lazy-guy/tomodoro" id="github-link" target="_blank" class="button-link hover-shadow">
-						<img alt="GitHub" src="./GitHub-Mark-64px.png" />
-						View on GitHub
-					</a>
-					<a href='https://ko-fi.com/Z8Z6E84CZ' target='_blank' id="kofi-link">
-						<img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
-					</a>
-				</section>
-				<section class="section">
-					<h2>About PIP mode</h2>
-					Tomodoro supports Always on Top mode, or Picture-In-Picture mode, right in the browser, without
-					having to install any electron app.<br />
-					PIP mode is supported on Chromium based browsers(Tested on Chrome and Edge).<br />
-					Safari not tested (yet) but might work.<br />
-					On desktop Firefox, PIP button will only make the video visible but will not activate PIP. To switch
-					to PIP mode, right click on the video and select "Watch in Picture-In-Picture".
-					<br /><br /><br />
-					<h2>PIP mode on Chrome for Android</h2>
-					If you are using Chrome for Android, then the PIP button will make the video element visible. In
-					order to switch to PIP mode, make the video fullscreen and then go to your device's homescreen(by
-					pressing home button or using navigation gesture) without exiting fullscreen. PIP Mode get be
-					activated.
-				</section>
-			</div>
-		</div> -->
-    <!-- <div id="statistics" class="scrollbar">
-			<div class="menu-title">
-				Statistics
-				<button id="closestats" class="crossbtn" title="Close Statistics"></button>
-			</div>
-			<div class="content">
-				<div class="setting">
-					<h3>Show Statistics of:</h3>
-					<div id="filters" class="scrollbar">
-						<label class="task-chip">
-							<input type="checkbox" id="all" checked />
-							<span class="chip-task-name">All Tasks</span>
-						</label>
-					</div>
-				</div>
-				<div class="setting">
-					<label for="stat-time-select">Time Period: </label>
-					<select id="stat-time-select">
-						<option value="0">Today</option>
-						<option value="1">Past Day</option>
-						<option value="7" selected>Past Week</option>
-						<option value="365">Past Year</option>
-						<option value="all">All Time</option>
-					</select>
-				</div>
-				<br /><br />
-				<h2>Overview</h2>
-				<div id="stat-summary" class="remark">
-					You focused for a total duration of
-					<span id="stat-summary-total"></span>
-					consisting of
-					<span id="stat-summary-rounds"></span>
-					Focus Rounds with an average round duration of
-					<span id="stat-summary-average"></span>
-					<br /><br />
-					Shortest round duration: <span id="stat-summary-shortest"></span>
-					<br />
-					Longest round duration: <span id="stat-summary-longest"></span>
-				</div>
-				<h2>Time Distribution:</h2>
-				<div id="pie-container">
-					<div id="pie">
-						<svg viewbox="0 0 120 120"></svg>
-					</div>
-					<div id="pie-card-container" class="scrollbar"></div>
-				</div>
-				<h2>Time Spent per Task:</h2>
-				<div id="timespent" class="stat-chart scrollbar"></div>
-				<br /><br />
-				<h2>Time Spent per 6 Hours:</h2>
-				<div id="timesixhourly" class="stat-chart scrollbar">
-					<div class="task-bar-container">
-						<div class="legend">00:00 - 06:00</div>
-						<div class="bar-container">
-							<div class="bar" id="hourly-0-6">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">06:00 - 12:00</div>
-						<div class="bar-container">
-							<div class="bar" id="hourly-6-12">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">12:00 - 18:00</div>
-						<div class="bar-container">
-							<div class="bar" id="hourly-12-18">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">18:00 - 24:00</div>
-						<div class="bar-container">
-							<div class="bar" id="hourly-18-24">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="remark-hourly" class="remark">
-					You were most productive between <span class="remark-value"></span>
-				</div>
-				<h2>Time Spent per Day:</h2>
-				<div id="timedaily" class="stat-chart scrollbar">
-					<div class="task-bar-container">
-						<div class="legend">Monday</div>
-						<div class="bar-container">
-							<div class="bar" id="day-monday">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">Tuesday</div>
-						<div class="bar-container">
-							<div class="bar" id="day-tuesday">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">Wednesday</div>
-						<div class="bar-container">
-							<div class="bar" id="day-wednesday">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">Thursday</div>
-						<div class="bar-container">
-							<div class="bar" id="day-thursday">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">Friday</div>
-						<div class="bar-container">
-							<div class="bar" id="day-friday">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">Saturday</div>
-						<div class="bar-container">
-							<div class="bar" id="day-saturday">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">Sunday</div>
-						<div class="bar-container">
-							<div class="bar" id="day-sunday">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="remark-daily" class="remark">
-					You were most productive on <span class="remark-value"></span>
-				</div>
-				<h2>Time Spent per Month:</h2>
-				<div id="timemonthly" class="stat-chart scrollbar">
-					<div class="task-bar-container">
-						<div class="legend">January</div>
-						<div class="bar-container">
-							<div class="bar" id="month-january">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">February</div>
-						<div class="bar-container">
-							<div class="bar" id="month-february">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">March</div>
-						<div class="bar-container">
-							<div class="bar" id="month-march">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">April</div>
-						<div class="bar-container">
-							<div class="bar" id="month-april">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">May</div>
-						<div class="bar-container">
-							<div class="bar" id="month-may">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">June</div>
-						<div class="bar-container">
-							<div class="bar" id="month-june">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">July</div>
-						<div class="bar-container">
-							<div class="bar" id="month-july">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">August</div>
-						<div class="bar-container">
-							<div class="bar" id="month-august">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">September</div>
-						<div class="bar-container">
-							<div class="bar" id="month-september">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">October</div>
-						<div class="bar-container">
-							<div class="bar" id="month-october">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">November</div>
-						<div class="bar-container">
-							<div class="bar" id="month-november">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-					<div class="task-bar-container">
-						<div class="legend">December</div>
-						<div class="bar-container">
-							<div class="bar" id="month-december">
-								<div class="stat-value">21:11</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="remark-monthly" class="remark">
-					You were most productive in <span class="remark-value"></span>
-				</div>
-				<details id="stat-details">
-					<summary><h2>Focus Round Records</h2></summary>
-					<div id="round-entries"></div>
-				</details>
-			</div>
-		</div> -->
     <div id="managetasks" class="scrollbar">
       <div class="menu-title">
         Tasks
@@ -557,26 +189,9 @@
           title="Return to main screen"
         ></button>
       </div>
-      <!-- <div class="content">
-				<h2>Your Tasks</h2>
-				Here you can manage your tasks.
-				<br /><br />
-				<div id="task-container"></div>
-				<form id="newtask" class="task">
-					<input
-						id="new-task-name"
-						name="taskname"
-						type="text"
-						min="1"
-						maxlength="25"
-						placeholder="Add New Task"
-					/>
-					<button type="submit" title="Create new task" class="crossbtn" id="new-task-btn"></button>
-				</form>
-			</div> -->
     </div>
     <div id="firstload">
-      <div id="firstloadcontent">
+      <!-- <div id="firstloadcontent">
         <h2>Welcome to Tomodoro!</h2>
         Tomodoro is an open source pomodoro web app with cool features like PIP
         Mode, white noise, tasks, statistics and offline support.
@@ -614,7 +229,7 @@
         fullscreen and then go to your device's homescreen(by pressing home
         button or using navigation gesture) without exiting fullscreen. PIP Mode
         get be activated.
-      </div>
+      </div> -->
       <button id="closeintro" class="hover-shadow">Let's Get Started!</button>
     </div>
     <script src="./index.js"></script>
