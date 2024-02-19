@@ -5,230 +5,6 @@ let themeAccent = "lavender";
 
 let pipActive = false;
 
-// const fullname = {
-//   focus: "Focus",
-//   short: "Short Break",
-//   long: "Long Break",
-// };
-
-// const accents = {
-//   dark: {
-//     red: {
-//       "--bgcolor": "#252222",
-//       "--bgcolor2": "#403333",
-//       "--color": "#ffeeee",
-//       "--coloraccent": "#ffaaaa",
-//     },
-//     violet: {
-//       "--bgcolor": "#252225",
-//       "--bgcolor2": "#3a2a3a",
-//       "--color": "#ffeeff",
-//       "--coloraccent": "#ee82ee",
-//     },
-//     blue: {
-//       "--bgcolor": "#131320",
-//       "--bgcolor2": "#1d3752",
-//       "--color": "#eeeeff",
-//       "--coloraccent": "#9bb2ff",
-//     },
-//     lavender: {
-//       "--bgcolor": "#222230",
-//       "--bgcolor2": "#333340",
-//       "--color": "#eeeeff",
-//       "--coloraccent": "#b2b2ff",
-//     },
-//     green: {
-//       "--bgcolor": "#1d201d",
-//       "--bgcolor2": "#143814",
-//       "--color": "#eeffee",
-//       "--coloraccent": "#8dd48d",
-//     },
-//     teal: {
-//       "--bgcolor": "#111f1f",
-//       "--bgcolor2": "#334040",
-//       "--color": "#eeffff",
-//       "--coloraccent": "#00aaaa",
-//     },
-//     grey: {
-//       "--bgcolor": "#222222",
-//       "--bgcolor2": "#444444",
-//       "--color": "#dddddd",
-//       "--coloraccent": "#aaaaaa",
-//     },
-//   },
-//   black: {
-//     red: {
-//       "--bgcolor2": "#403333",
-//       "--color": "#ffeeee",
-//       "--coloraccent": "#ffaaaa",
-//       "--bgcolor": "#000000",
-//     },
-//     violet: {
-//       "--bgcolor": "#000000",
-//       "--bgcolor2": "#312131",
-//       "--color": "#ffeeff",
-//       "--coloraccent": "#ee82ee",
-//     },
-//     blue: {
-//       "--bgcolor2": "#1d3752",
-//       "--color": "#eeeeff",
-//       "--coloraccent": "#9bb2ff",
-//       "--bgcolor": "#000000",
-//     },
-//     lavender: {
-//       "--bgcolor2": "#333340",
-//       "--color": "#eeeeff",
-//       "--coloraccent": "#b2b2ff",
-//       "--bgcolor": "#000000",
-//     },
-//     green: {
-//       "--bgcolor2": "#143814",
-//       "--color": "#eeffee",
-//       "--coloraccent": "#8dd48d",
-//       "--bgcolor": "#000000",
-//     },
-//     teal: {
-//       "--bgcolor": "#000000",
-//       "--bgcolor2": "#303f3f",
-//       "--color": "#eeffff",
-//       "--coloraccent": "#00aaaa",
-//     },
-//     grey: {
-//       "--bgcolor2": "#444444",
-//       "--color": "#dddddd",
-//       "--coloraccent": "#aaaaaa",
-//       "--bgcolor": "#000000",
-//     },
-//   },
-//   light: {
-//     red: {
-//       "--bgcolor": "#fff3f3",
-//       "--bgcolor2": "#ffd2d2",
-//       "--color": "#222222",
-//       "--coloraccent": "#d64f4f",
-//     },
-//     violet: {
-//       "--bgcolor": "#fff3ff",
-//       "--bgcolor2": "#ffd2ff",
-//       "--color": "#222222",
-//       "--coloraccent": "#ee82ee",
-//     },
-//     blue: {
-//       "--bgcolor": "#f3f3ff",
-//       "--bgcolor2": "#d2d2ff",
-//       "--color": "#222222",
-//       "--coloraccent": "#4169e4",
-//     },
-//     lavender: {
-//       "--bgcolor": "#faf1ff",
-//       "--bgcolor2": "#e2d4ff",
-//       "--color": "#222222",
-//       "--coloraccent": "#8b51ff",
-//     },
-//     teal: {
-//       "--bgcolor": "#faffff",
-//       "--bgcolor2": "#cbebeb",
-//       "--color": "#222222",
-//       "--coloraccent": "#008080",
-//     },
-//     green: {
-//       "--bgcolor": "#f3fff3",
-//       "--bgcolor2": "#cafcc1",
-//       "--color": "#222222",
-//       "--coloraccent": "#39743d",
-//     },
-//     grey: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#dddddd",
-//       "--color": "#333333",
-//       "--coloraccent": "#555555",
-//     },
-//   },
-//   white: {
-//     red: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#ffd2d2",
-//       "--color": "#222222",
-//       "--coloraccent": "#ee7777",
-//     },
-//     violet: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#ffd2ff",
-//       "--color": "#222222",
-//       "--coloraccent": "#ee82ee",
-//     },
-//     blue: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#d2d2ff",
-//       "--color": "#222222",
-//       "--coloraccent": "#4169e4",
-//     },
-//     lavender: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#e2d4ff",
-//       "--color": "#222222",
-//       "--coloraccent": "#8b51ff",
-//     },
-//     teal: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#cbebeb",
-//       "--color": "#222222",
-//       "--coloraccent": "#008080",
-//     },
-//     green: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#cafcc1",
-//       "--color": "#222222",
-//       "--coloraccent": "#39743d",
-//     },
-//     grey: {
-//       "--bgcolor": "#ffffff",
-//       "--bgcolor2": "#dddddd",
-//       "--color": "#333333",
-//       "--coloraccent": "#555555",
-//     },
-//   },
-// };
-
-// const themes = {
-//   dark: {
-//     props: {
-//       "color-scheme": "dark",
-//       "--focus": "#d64f4f",
-//       "--short": "#26baba",
-//       "--long": "#5fbbe6",
-//     },
-//     defaccent: "lavender",
-//   },
-//   light: {
-//     props: {
-//       "color-scheme": "light",
-//       "--focus": "#d64f4f",
-//       "--short": "#26baba",
-//       "--long": "#5fbbe6",
-//     },
-//     defaccent: "red",
-//   },
-//   black: {
-//     props: {
-//       "color-scheme": "dark",
-//       "--focus": "#d64f4f",
-//       "--short": "#26baba",
-//       "--long": "#5fbbe6",
-//     },
-//     defaccent: "lavender",
-//   },
-//   white: {
-//     props: {
-//       "color-scheme": "light",
-//       "--focus": "#d64f4f",
-//       "--short": "#26baba",
-//       "--long": "#5fbbe6",
-//     },
-//     defaccent: "red",
-//   },
-// };
-
 let config = {
   focus: 1500,
   short: 300,
@@ -238,14 +14,11 @@ let config = {
 
 //#region PIP Mode
 let canvas = document.createElement("canvas");
-canvas.width = canvas.height = 400;
+canvas.width = canvas.height = "fit-content";
 let ctx = canvas.getContext("2d");
 
 function loop() {
-//   ctx.fillStyle = accents[theme][themeAccent]["--bgcolor"];
   ctx.fillRect(0, 0, 400, 400);
-
-//   ctx.fillStyle = accents[theme][themeAccent]["--color"];
   ctx.font = "80px monospace";
   ctx.textAlign = "center";
   let seconds = config[roundInfo.current] - roundInfo.t;
@@ -258,15 +31,11 @@ function loop() {
   ctx.fillText(timestr, 200, 200, 280);
 
   ctx.font = "32px monospace";
-//   ctx.fillText(fullname[roundInfo.current].toUpperCase(), 200, 260, 280);
-
-//   ctx.strokeStyle = accents[theme][themeAccent]["--coloraccent"];
   ctx.lineWidth = 4;
   ctx.beginPath();
   ctx.arc(200, 200, 180, 0, Math.PI * 2);
   ctx.stroke();
 
-//   ctx.strokeStyle = themes[theme].props["--" + roundInfo.current];
   ctx.lineWidth = 16;
   ctx.beginPath();
   ctx.arc(
