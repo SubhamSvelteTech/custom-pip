@@ -12,11 +12,11 @@ volumeSlider.addEventListener('input', () => {
   gain.gain.linearRampToValueAtTime(volume / 100, audioCtx.currentTime + 1);
 });
 
-if ("serviceWorker" in navigator) {
-	navigator.serviceWorker.register("./sw.js");
-}
+// if ("serviceWorker" in navigator) {
+// 	navigator.serviceWorker.register("./sw.js");
+// }
 
-let timerWorker = new Worker("./worker.js");
+// let timerWorker = new Worker("./worker.js");
 
 let root = document.documentElement;
 
@@ -28,78 +28,65 @@ let manageTasks = document.getElementById("managetasks");
 let timediv = document.getElementById("time");
 let timer = document.getElementById("timer");
 let roundnoDiv = document.getElementById("roundno");
-let pauseplaybtn = document.getElementById("pauseplay");
+// let pauseplaybtn = document.getElementById("pauseplay");
 let progress = document.getElementById("progress");
 
 let nextbtn = document.getElementById("next");
 let menubtn = document.getElementById("menubtn");
 let taskSelect = document.getElementById("task-select");
 
-const timerInputs = {
-	focus: document.getElementById("focus-input"),
-	short: document.getElementById("short-input"),
-	long: document.getElementById("long-input"),
-	rounds: document.getElementById("rounds-input"),
-};
-
 let colorsDiv = document.getElementById("colors");
 
-let pipActive = false;
 
-const fullname = {
-	focus: "Focus",
-	short: "Short Break",
-	long: "Long Break",
-};
 
-let viewState = "timer";
+// let viewState = "timer";
 
-let config = {
-	focus: 1500,
-	short: 300,
-	long: 900,
-	longGap: 4,
-};
+// let config = {
+// 	focus: 1500,
+// 	short: 300,
+// 	long: 900,
+// 	longGap: 4,
+// };
 
-let audioType = "";
+// let audioType = "";
 
-const audioTypes = ["noise"];
+// const audioTypes = ["noise"];
 
-let roundInfo = {
-	t: 0,
-	focusNum: 1,
-	current: "focus",
-	running: false,
-};
+// let roundInfo = {
+// 	t: 0,
+// 	focusNum: 1,
+// 	current: "focus",
+// 	running: false,
+// };
 
 //#region Time
 
-function setTime() {
-	let seconds = config[roundInfo.current] - roundInfo.t;
-	if (seconds < 0) {
-		nextRound();
-		return;
-	}
-	let timestr =
-		Math.floor(seconds / 60)
-			.toString()
-			.padStart(2, "0") +
-		":" +
-		(seconds % 60).toString().padStart(2, "0");
-	timediv.innerText = timestr;
-	document.title = `${timestr} ${fullname[roundInfo.current]} - Tomodoro`;
-	progress.style.strokeDashoffset = (roundInfo.t / config[roundInfo.current]) * 100;
-	if (pipActive) loop();
-}
+// function setTime() {
+// 	let seconds = config[roundInfo.current] - roundInfo.t;
+// 	if (seconds < 0) {
+// 		nextRound();
+// 		return;
+// 	}
+// 	let timestr =
+// 		Math.floor(seconds / 60)
+// 			.toString()
+// 			.padStart(2, "0") +
+// 		":" +
+// 		(seconds % 60).toString().padStart(2, "0");
+// 	timediv.innerText = timestr;
+// 	document.title = `${timestr} ${fullname[roundInfo.current]} - Tomodoro`;
+// 	progress.style.strokeDashoffset = (roundInfo.t / config[roundInfo.current]) * 100;
+// 	if (pipActive) loop();
+// }
 
-timerWorker.addEventListener("message", (e) => {
-	roundInfo.t = e.data.t;
-	setTime();
-	if (!e.data.running) {
-		timer.style.setProperty("--progress", "0");
-		nextRound();
-	}
-});
+// timerWorker.addEventListener("message", (e) => {
+// 	roundInfo.t = e.data.t;
+// 	setTime();
+// 	if (!e.data.running) {
+// 		timer.style.setProperty("--progress", "0");
+// 		nextRound();
+// 	}
+// });
 
 //#endregion
 
@@ -130,49 +117,49 @@ function nextRound() {
 
 	timer.className = "t-" + roundInfo.current;
 	roundInfo.t = 0;
-	setTime();
+	// setTime();
 	if (roundInfo.running) {
 		if (roundInfo.current === "focus" && audioType === "noise") {
 			fadeIn();
 		}
-		timerWorker.postMessage({
-			type: "start",
-			maxDuration: config[roundInfo.current],
-		});
+		// timerWorker.postMessage({
+		// 	type: "start",
+		// 	maxDuration: config[roundInfo.current],
+		// });
 	}
 	notify(`${finished} Complete`, body);
 }
 
-function pauseplay() {
-	if (roundInfo.current === "none") {
-		nextRound();
-		pauseplaybtn.className = "playing";
-		return;
-	}
-	if (roundInfo.running) {
-		if (roundInfo.current === "focus" && audioType === "noise") {
-			fadeOut();
-		}
-		timerWorker.postMessage({ type: "stop" });
-		roundInfo.running = false;
-		pauseplaybtn.title = "Start Timer";
-		pauseplaybtn.className = "paused";
-	} else {
-		if (roundInfo.current === "focus" && audioType === "noise") {
-			fadeIn();
-		}
-		timerWorker.postMessage({
-			type: "start",
-			t: roundInfo.t,
-			maxDuration: config[roundInfo.current],
-		});
-		roundInfo.running = true;
-		pauseplaybtn.title = "Pause Timer";
-		pauseplaybtn.className = "playing";
-	}
-}
+// function pauseplay() {
+// 	if (roundInfo.current === "none") {
+// 		nextRound();
+// 		pauseplaybtn.className = "playing";
+// 		return;
+// 	}
+// 	if (roundInfo.running) {
+// 		if (roundInfo.current === "focus" && audioType === "noise") {
+// 			fadeOut();
+// 		}
+// 		timerWorker.postMessage({ type: "stop" });
+// 		roundInfo.running = false;
+// 		pauseplaybtn.title = "Start Timer";
+// 		pauseplaybtn.className = "paused";
+// 	} else {
+// 		if (roundInfo.current === "focus" && audioType === "noise") {
+// 			fadeIn();
+// 		}
+// 		timerWorker.postMessage({
+// 			type: "start",
+// 			t: roundInfo.t,
+// 			maxDuration: config[roundInfo.current],
+// 		});
+// 		roundInfo.running = true;
+// 		pauseplaybtn.title = "Pause Timer";
+// 		pauseplaybtn.className = "playing";
+// 	}
+// }
 
-pauseplaybtn.addEventListener("click", pauseplay);
+// pauseplaybtn.addEventListener("click", pauseplay);
 
 nextbtn.addEventListener("click", () => {
 	nextRound();
@@ -181,20 +168,20 @@ nextbtn.addEventListener("click", () => {
 document.getElementById("resetround").addEventListener("click", () => {
 	if (roundInfo.running) pauseplay();
 	roundInfo.t = 0;
-	setTime();
+	// setTime();
 });
 
 document.addEventListener("keydown", (event) => {
 	if (event.isComposing || event.keyCode === 229) {
 		return;
 	}
-	if (event.code === "Space") {
-		if (document.activeElement === pauseplaybtn || viewState !== "timer") {
-			return;
-		}
-		pauseplaybtn.focus();
-		pauseplay();
-	}
+	// if (event.code === "Space") {
+	// 	if (document.activeElement === pauseplaybtn || viewState !== "timer") {
+	// 		return;
+	// 	}
+	// 	pauseplaybtn.focus();
+	// 	pauseplay();
+	// }
 });
 
 //#endregion
@@ -253,18 +240,18 @@ function notify(title, message) {
 	}
 }
 
-function setup() {
-	if ("Notification" in window) {
-		if (Notification.permission !== "denied" && Notification.permission !== "granted") {
-			Notification.requestPermission();
-		}
-	}
+// function setup() {
+// 	if ("Notification" in window) {
+// 		if (Notification.permission !== "denied" && Notification.permission !== "granted") {
+// 			Notification.requestPermission();
+// 		}
+// 	}
 
-	setTime();
-	roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
-}
+// 	// setTime();
+// 	roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
+// }
 
-setup();
+// setup();
 
 //#endregion
 
@@ -432,18 +419,6 @@ document.getElementById("statbtn").addEventListener("click", function () {
 	lastanim.onfinish = () => (mainel.style.display = "none");
 	viewState = "statistics";
 	loadStatistics();
-});
-
-document.getElementById("closestats").addEventListener("click", function () {
-	if (lastanim) lastanim.cancel();
-	if (viewState === "statistics") {
-		mainel.style.display = "flex";
-		lastanim = statisticsDiv.animate(animations.out, animations.animoptions);
-		lastanim.onfinish = () => {
-			statisticsDiv.style.display = "none";
-		};
-		viewState = "timer";
-	}
 });
 
 //#endregion
@@ -1119,43 +1094,104 @@ function hmstrFull(t) {
 
 //#region Theming
 
-const themes = {
-	dark: {
-		props: {
-			"color-scheme": "dark",
-			"--focus": "#d64f4f",
-			"--short": "#26baba",
-			"--long": "#5fbbe6",
-		},
-		defaccent: "lavender",
-	},
-	light: {
-		props: {
-			"color-scheme": "light",
-			"--focus": "#d64f4f",
-			"--short": "#26baba",
-			"--long": "#5fbbe6",
-		},
-		defaccent: "red",
-	},
-	black: {
-		props: {
-			"color-scheme": "dark",
-			"--focus": "#d64f4f",
-			"--short": "#26baba",
-			"--long": "#5fbbe6",
-		},
-		defaccent: "lavender",
-	},
-	white: {
-		props: {
-			"color-scheme": "light",
-			"--focus": "#d64f4f",
-			"--short": "#26baba",
-			"--long": "#5fbbe6",
-		},
-		defaccent: "red",
-	},
+let theme = "dark";
+let themeAccent = "lavender";
+
+// function setTheme(basetheme = "dark", accent) {
+// 	if (!accent) accent = themes[basetheme].defaccent;
+// 	if (basetheme !== "custom") {
+// 		for (let prop in themes[basetheme].props) {
+// 			root.style.setProperty(prop, themes[basetheme].props[prop]);
+// 		}
+// 		document.getElementById("t-" + theme).removeAttribute("selected");
+// 		addColorButtons(basetheme);
+// 		document.getElementById("t-" + basetheme).setAttribute("selected", true);
+// 		setAccent(basetheme, accent);
+// 	}
+// }
+
+let colorBtns = [];
+
+function addColorButtons(basetheme) {
+	colorsDiv.innerHTML = "";
+	colorBtns = [];
+	for (let accent in accents[basetheme]) {
+		let btn = document.createElement("button");
+		btn.className = "color";
+		btn.style.backgroundColor = accents[basetheme][accent]["--coloraccent"];
+		btn.dataset.color = basetheme + "-" + accent;
+		btn.addEventListener("click", () => {
+			setAccent(basetheme, accent);
+		});
+		btn.title = accent;
+		colorBtns.push(btn);
+		colorsDiv.appendChild(btn);
+	}
+}
+
+let themeMeta = document.getElementById("theme-meta");
+
+function setAccent(basetheme, accent) {
+	for (let prop in accents[basetheme][accent]) {
+		root.style.setProperty(prop, accents[basetheme][accent][prop]);
+	}
+	themeMeta.setAttribute("content", accents[basetheme][accent]["--bgcolor"]);
+	colorBtns.forEach((btn) => {
+		if (btn.dataset.active === "true") {
+			btn.dataset.active = "false";
+		}
+		if (btn.dataset.color === basetheme + "-" + accent) {
+			btn.dataset.active = "true";
+		}
+	});
+
+	localStorage.setItem("pomo-theme", basetheme);
+	localStorage.setItem("pomo-theme-accent", accent);
+	theme = basetheme;
+	themeAccent = accent;
+}
+
+// document.getElementById("theme-select").addEventListener("change", function () {
+// 	setTheme(this.value);
+// });
+
+if (localStorage.getItem("pomo-theme")) {
+	theme = localStorage.getItem("pomo-theme");
+	if (localStorage.getItem("pomo-theme-accent")) {
+		themeAccent = localStorage.getItem("pomo-theme-accent");
+	}
+}
+// setTheme(theme, themeAccent);
+
+//#endregion
+
+//#region Timer Durations
+
+// if (localStorage.getItem("pomo-config")) {
+// 	config = JSON.parse(localStorage.getItem("pomo-config"));
+// 	setTime();
+// }
+
+// function saveConfig() {
+// 	localStorage.setItem("pomo-config", JSON.stringify(config));
+// 	setTime();
+// }
+
+
+
+
+
+
+
+
+
+
+let pipActive = false;
+
+const fullname = {
+	focus: "Focus",
+	short: "Short Break",
+	long: "Long Break",
 };
 
 const accents = {
@@ -1337,168 +1373,81 @@ const accents = {
 	},
 };
 
-let theme = "dark";
-let themeAccent = "lavender";
+const themes = {
+	dark: {
+		props: {
+			"color-scheme": "dark",
+			"--focus": "#d64f4f",
+			"--short": "#26baba",
+			"--long": "#5fbbe6",
+		},
+		defaccent: "lavender",
+	},
+	light: {
+		props: {
+			"color-scheme": "light",
+			"--focus": "#d64f4f",
+			"--short": "#26baba",
+			"--long": "#5fbbe6",
+		},
+		defaccent: "red",
+	},
+	black: {
+		props: {
+			"color-scheme": "dark",
+			"--focus": "#d64f4f",
+			"--short": "#26baba",
+			"--long": "#5fbbe6",
+		},
+		defaccent: "lavender",
+	},
+	white: {
+		props: {
+			"color-scheme": "light",
+			"--focus": "#d64f4f",
+			"--short": "#26baba",
+			"--long": "#5fbbe6",
+		},
+		defaccent: "red",
+	},
+};
 
-function setTheme(basetheme = "dark", accent) {
-	if (!accent) accent = themes[basetheme].defaccent;
-	if (basetheme !== "custom") {
-		for (let prop in themes[basetheme].props) {
-			root.style.setProperty(prop, themes[basetheme].props[prop]);
-		}
-		document.getElementById("t-" + theme).removeAttribute("selected");
-		addColorButtons(basetheme);
-		document.getElementById("t-" + basetheme).setAttribute("selected", true);
-		setAccent(basetheme, accent);
-	}
-}
+let config = {
+	focus: 1500,
+	short: 300,
+	long: 900,
+	longGap: 4,
+};
 
-let colorBtns = [];
-
-function addColorButtons(basetheme) {
-	colorsDiv.innerHTML = "";
-	colorBtns = [];
-	for (let accent in accents[basetheme]) {
-		let btn = document.createElement("button");
-		btn.className = "color";
-		btn.style.backgroundColor = accents[basetheme][accent]["--coloraccent"];
-		btn.dataset.color = basetheme + "-" + accent;
-		btn.addEventListener("click", () => {
-			setAccent(basetheme, accent);
-		});
-		btn.title = accent;
-		colorBtns.push(btn);
-		colorsDiv.appendChild(btn);
-	}
-}
-
-let themeMeta = document.getElementById("theme-meta");
-
-function setAccent(basetheme, accent) {
-	for (let prop in accents[basetheme][accent]) {
-		root.style.setProperty(prop, accents[basetheme][accent][prop]);
-	}
-	themeMeta.setAttribute("content", accents[basetheme][accent]["--bgcolor"]);
-	colorBtns.forEach((btn) => {
-		if (btn.dataset.active === "true") {
-			btn.dataset.active = "false";
-		}
-		if (btn.dataset.color === basetheme + "-" + accent) {
-			btn.dataset.active = "true";
-		}
-	});
-
-	localStorage.setItem("pomo-theme", basetheme);
-	localStorage.setItem("pomo-theme-accent", accent);
-	theme = basetheme;
-	themeAccent = accent;
-}
-
-document.getElementById("theme-select").addEventListener("change", function () {
-	setTheme(this.value);
-});
-
-if (localStorage.getItem("pomo-theme")) {
-	theme = localStorage.getItem("pomo-theme");
-	if (localStorage.getItem("pomo-theme-accent")) {
-		themeAccent = localStorage.getItem("pomo-theme-accent");
-	}
-}
-setTheme(theme, themeAccent);
-
-//#endregion
-
-//#region Timer Durations
-
-if (localStorage.getItem("pomo-config")) {
-	config = JSON.parse(localStorage.getItem("pomo-config"));
-	setTime();
-}
-
-function saveConfig() {
-	localStorage.setItem("pomo-config", JSON.stringify(config));
-	setTime();
-}
-
-timerInputs.focus.value = config.focus / 60;
-timerInputs.short.value = config.short / 60;
-timerInputs.long.value = config.long / 60;
-timerInputs.rounds.value = config.longGap;
-
-function timerInput(name, value) {
-	if (value > 180) {
-		config[name] = 10800;
-		timerInputs[name].value = 180;
-	} else if (value < 1) {
-		config[name] = 60;
-		timerInputs[name].value = 1;
-	} else {
-		config[name] = value * 60;
-	}
-	saveConfig();
-}
-
-function incrementTimer(name) {
-	if (config[name] < 10800) {
-		config[name] += 60;
-		timerInputs[name].value = config[name] / 60;
-	}
-	saveConfig();
-}
-
-function decrementTimer(name) {
-	if (config[name] > 60) {
-		config[name] -= 60;
-		timerInputs[name].value = config[name] / 60;
-	}
-	saveConfig();
-}
-
-timerInputs.focus.addEventListener("input", function () {
-	timerInput("focus", this.value);
-});
-timerInputs.short.addEventListener("input", function () {
-	timerInput("short", this.value);
-});
-timerInputs.long.addEventListener("input", function () {
-	timerInput("long", this.value);
-});
-timerInputs.rounds.addEventListener("input", function () {
-	if (this.value > 18) {
-		config.longGap = 18;
-		this.value = 18;
-	} else if (this.value < 1) {
-		config.longGap = 1;
-		this.value = 1;
-	} else {
-		config.longGap = parseInt(this.value);
-	}
-	saveConfig();
-});
-
-document.getElementById("focus-inc").addEventListener("click", () => incrementTimer("focus"));
-document.getElementById("short-inc").addEventListener("click", () => incrementTimer("short"));
-document.getElementById("long-inc").addEventListener("click", () => incrementTimer("long"));
-
-document.getElementById("focus-dec").addEventListener("click", () => decrementTimer("focus"));
-document.getElementById("short-dec").addEventListener("click", () => decrementTimer("short"));
-document.getElementById("long-dec").addEventListener("click", () => decrementTimer("long"));
-
-document.getElementById("rounds-inc").addEventListener("click", () => {
-	config.longGap = config.longGap < 18 ? config.longGap + 1 : 18;
-	timerInputs.rounds.value = config.longGap;
-	roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
-	saveConfig();
-});
-
-document.getElementById("rounds-dec").addEventListener("click", () => {
-	config.longGap = config.longGap > 1 ? config.longGap - 1 : 1;
-	timerInputs.rounds.value = config.longGap;
-	roundnoDiv.innerText = roundInfo.focusNum + "/" + config.longGap;
-	saveConfig();
-});
-
-//#endregion
+// let pauseplaybtn = document.getElementById("pauseplay");
+// function pauseplay() {
+// 	if (roundInfo.current === "none") {
+// 		nextRound();
+// 		pauseplaybtn.className = "playing";
+// 		return;
+// 	}
+// 	if (roundInfo.running) {
+// 		if (roundInfo.current === "focus" && audioType === "noise") {
+// 			fadeOut();
+// 		}
+// 		// timerWorker.postMessage({ type: "stop" });
+// 		roundInfo.running = false;
+// 		pauseplaybtn.title = "Start Timer";
+// 		pauseplaybtn.className = "paused";
+// 	} else {
+// 		if (roundInfo.current === "focus" && audioType === "noise") {
+// 			fadeIn();
+// 		}
+// 		// timerWorker.postMessage({
+// 		// 	type: "start",
+// 		// 	t: roundInfo.t,
+// 		// 	maxDuration: config[roundInfo.current],
+// 		// });
+// 		roundInfo.running = true;
+// 		pauseplaybtn.title = "Pause Timer";
+// 		pauseplaybtn.className = "playing";
+// 	}
+// }
 
 //#region PIP Mode
 let canvas = document.createElement("canvas");
@@ -1669,24 +1618,24 @@ if ('documentPictureInPicture' in window) {
 		document.getElementById("popupbtn").style.display = "none";
 	}
 }
-//#endregion
+// //#endregion
 
-let versionNo = 1;
+// let versionNo = 1;
 
-let savedNo = parseInt(localStorage.getItem("pomo-version"));
+// let savedNo = parseInt(localStorage.getItem("pomo-version"));
 
-if (!savedNo) {
-	if (localStorage.getItem("pomo-notfirstload")) {
-		localStorage.removeItem("pomo-notfirstload");
-	}
-}
+// if (!savedNo) {
+// 	if (localStorage.getItem("pomo-notfirstload")) {
+// 		localStorage.removeItem("pomo-notfirstload");
+// 	}
+// }
 
-if (savedNo !== versionNo) {
-	document.getElementById("firstload").style.display = "block";
-	mainel.style.display = "none";
-	document.getElementById("closeintro").addEventListener("click", () => {
-		document.getElementById("firstload").style.display = "none";
-		localStorage.setItem("pomo-version", versionNo);
-		mainel.style.display = "flex";
-	});
-}
+// if (savedNo !== versionNo) {
+// 	document.getElementById("firstload").style.display = "block";
+// 	mainel.style.display = "none";
+// 	document.getElementById("closeintro").addEventListener("click", () => {
+// 		document.getElementById("firstload").style.display = "none";
+// 		localStorage.setItem("pomo-version", versionNo);
+// 		mainel.style.display = "flex";
+// 	});
+// }
